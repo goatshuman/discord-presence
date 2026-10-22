@@ -1,6 +1,20 @@
+const express = require('express');
 const { Client, RichPresence } = require('discord.js-selfbot-v13');
 const fetch = require('node-fetch');
 
+// 1. Web Server Setup for Render Free Tier
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('✅ Discord Presence Bot is running 24/7 on Render Free Tier!');
+});
+
+app.listen(PORT, () => {
+  console.log(`🌐 Web server listening on port ${PORT}`);
+});
+
+// 2. Discord Presence Logic
 const token = process.env.DISCORD_TOKEN;
 const targetGameName = process.env.GAME_NAME || "Resident Evil 3";
 
@@ -29,7 +43,7 @@ async function lookupGameInfo(gameName) {
 }
 
 client.on('ready', async () => {
-  console.log(`✅ Connected successfully as ${client.user.tag}!`);
+  console.log(`✅ Logged in successfully as ${client.user.tag}!`);
   const gameInfo = await lookupGameInfo(targetGameName);
   setRichPresence(gameInfo.name, gameInfo.id);
 
@@ -54,7 +68,7 @@ function setRichPresence(name, applicationId) {
       status: 'online'
     });
 
-    console.log(`🎮 Activity set: Playing ${name} (ID: ${applicationId})`);
+    console.log(`🎮 Activity status set: Playing ${name}`);
   } catch (error) {
     console.error("⚠️ Failed to set presence:", error);
   }
