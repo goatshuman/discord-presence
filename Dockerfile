@@ -1,33 +1,12 @@
-FROM ubuntu22.04
+FROM node:18-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /app
 
-# Install system utilities, Xvfb framebuffer, and C++ compiler tools
-RUN apt-get update && apt-get install -y 
-    xvfb 
-    x11vnc 
-    wget 
-    curl 
-    build-essential 
-    g++ 
-    && rm -rf varlibaptlists
+COPY package*.json ./
+RUN npm install
 
-WORKDIR app
+COPY . .
 
-# Copy repository source files
-COPY . app
+EXPOSE 3000
 
-# Compile native Linux game stub binary named 're3'
-RUN g++ -O2 src-winsrcmain.cpp -o re3  touch re3
-
-# Generate startup execution script
-RUN echo '#!binbashn
-export DISPLAY=99n
-Xvfb 99 -screen 0 1280x1024x24 &n
-sleep 2n
-.re3 &n
-echo Native Linux Game Stub active on Render...n
-tail -f devnulln
-'  appstart.sh && chmod +x appstart.sh
-
-CMD [appstart.sh]
+CMD ["node", "index.js"]
