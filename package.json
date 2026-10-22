@@ -1,13 +1,14 @@
 {
   "name": "discord-presence-render",
   "version": "1.0.0",
-  "description": "Render Headless Presence Runner",
+  "description": "Render Free Web Service Discord Presence",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "discord.js-selfbot-v13": "^13.14.3",
+    "express": "^4.18.2",
     "node-fetch": "^2.6.7"
   },
   "engines": {
