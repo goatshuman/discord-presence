@@ -1,0 +1,16 @@
+{
+  "name": "discord-presence-render",
+  "version": "1.0.0",
+  "description": "Render Headless Presence Runner",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js-selfbot-v13": "^13.14.3",
+    "node-fetch": "^2.6.7"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
